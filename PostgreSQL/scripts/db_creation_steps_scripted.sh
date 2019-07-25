@@ -1,11 +1,14 @@
-# Steps on Timo machines
+# Steps to perform on a VM in order to run Postgres
+# Fabio Pardi on July 2019
 
-# manually create sdb1
-#fdisk /dev/sdb
+# This script is not idempotent, and potentially destructive
+# Expects a volume as sdb, not mounted
 
 echo 
 echo "Welcome to Postgres installer, created for Ubuntu 18.04"
 echo 
+
+# Exit on errors
 set -e
 
 echo -n "Creating partition sdb1............. "
