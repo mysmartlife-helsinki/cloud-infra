@@ -63,3 +63,11 @@ echo -n "Tuning sysctl.conf................ "
 echo "vm.overcommit_memory=2" >> /etc/sysctl.conf
 echo "vm.overcommit_ratio = 99" >> /etc/sysctl.conf
 echo "OK!"
+
+
+echo -n "Applying config files............. "
+mv /etc/postgresql/10/main/postgresql.conf /etc/postgresql/10/main/postgresql.conf.default
+cp ../conf/postgresql.conf /etc/postgresql/10/main/
+echo "OK! Default config saved in /etc/postgresql/10/main/postgresql.conf.default"
+
+
