@@ -4,21 +4,24 @@ OK  Describe a list of requirements, and good to have. Discuss if is the case to
 
    OK db is missing sdb disk
    SKIP data disks are 10GB. we talked about 40GB. 10 GB is OK, but is not very much. 
+   NOTE: disks are now 20GB
 
 OK  Feedback loop on the above
 
 OK  Create partition: XFS FS with mount options: 'rw,noatime,nobarrier,discard'
--  Tune OS kernel parameters, avoid OOM killer
--  
+OK  Tune OS kernel parameters, avoid OOM killer
+
 OK  Install Postgres instance
 OK  Initialize db
 OK  Install and create extension PostGis
--  Check firewalling, adjust it based on networking and sibilings
+OK  Check firewalling, adjust it based on networking and sibilings
 OK  Harden: no listen on external inerface
--  Configure and Tune Postgres instance
+-  Configure Postgres instance
+-  Tune Postgres Instance based on resources
      - commit config files!
 
 -  Evaluate additional extensions
+
 -  Create Siblings
 -  Configure master and siblings, instruct replication, pg_hba.conf with separate users
 -  Document failover procedure

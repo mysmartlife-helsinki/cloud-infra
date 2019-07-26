@@ -21,7 +21,7 @@ mkdir /pgdata
 echo "OK!"
 
 echo -n "Accomodating fstab................ "
-echo "UUID=`blkid -s UUID -o value /dev/sdb1` /pgdata           xfs     nobarrier,discard,noatime 1       2" >> /etc/fstab
+echo "UUID=`blkid -s UUID -o value /dev/sdb1` /pgdata           xfs     discard,noatime 1       2" >> /etc/fstab
 mount -a 
 echo "OK! /pgdata now available"
 
@@ -54,3 +54,12 @@ echo " `ip addr show ens10 | grep -o "inet [0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | gre
 echo "OK!"
 
 
+echo -n "Accomodating Firewall ............ "
+ufw allow in on ens10 to any port 5432
+echo "OK! Connections on backend to Postgres are allowed. WARNING: NOT FOR PRODUCTION. Access must be fine-graned in order to guarantee better security at network level"
+
+
+echo -n "Tuning sysctl.conf................ "
+echo "vm.overcommit_memory=2" >> /etc/sysctl.conf
+echo "vm.overcommit_ratio = 99" >> /etc/sysctl.conf
+echo "OK!"
