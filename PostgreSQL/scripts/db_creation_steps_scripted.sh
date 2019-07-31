@@ -27,7 +27,7 @@ echo "OK! /pgdata now available"
 
 
 echo -n "Installing packages............... "
-apt-get install postgresql-10 postgresql-client-10 postgresql-10-postgis-2.4  postgresql-10-postgis-scripts > /dev/null
+apt-get install -y postgresql-10 postgresql-client-10 postgresql-10-postgis-2.4  postgresql-10-postgis-scripts > /dev/null
 echo "OK! DB is now installed"
 
 #Success. You can now start the database server using:
