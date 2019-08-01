@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Steps to perform on a VM in order to run Postgres
 # Fabio Pardi on July 2019
 
@@ -5,7 +7,7 @@
 # Expects a volume as sdb, not mounted
 
 echo 
-echo "Welcome to Postgres installer, created for Ubuntu 18.04"
+echo "Welcome to the Postgres installer, created for Ubuntu 18.04"
 echo 
 
 # Exit on errors
@@ -42,7 +44,7 @@ echo -n "Accomodating folders and volumes.. "
 rsync -a /var/lib/postgresql/ /pgdata/ 
 rm -fr /var/lib/postgresql/ 
 ln -s /pgdata/ /var/lib/postgresql
-echo "OK! You can now connect as:  psql -U postgres -h /var/run/postgresql postgres"
+echo "OK! "
 
 
 
@@ -68,6 +70,12 @@ echo "OK!"
 echo -n "Applying config files............. "
 mv /etc/postgresql/10/main/postgresql.conf /etc/postgresql/10/main/postgresql.conf.default
 cp ../conf/postgresql.conf /etc/postgresql/10/main/
+chown postgres.postgres /etc/postgresql/10/main/postgresql.conf
 echo "OK! Default config saved in /etc/postgresql/10/main/postgresql.conf.default"
 
+echo -n "Creating upsers on db............. "
+su - postgres -c "createuser appuser"
+su - postgres -c "createuser --replication repluser"
+echo "OK!"
 
+echo "Reboot needed"
