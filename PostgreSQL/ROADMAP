@@ -20,21 +20,21 @@ OK  Configure Postgres instance
 OK  Tune Postgres Instance based on resources
      OK commit config files!
 
--  Evaluate additional extensions
+OK  Evaluate additional extensions
 
 -  Create Siblings
--  Configure master and siblings, instruct replication, pg_hba.conf with separate users
+OK  Configure master and siblings, instruct replication, pg_hba.conf with separate users
+OK  Update shared network schema on google docs
 -  Document failover procedure
 -  Document extension creation: per db, how, which postgis_* is needed 
--  Discuss about:
+-  Points to discuss or note down:
     - The need of pgbouncer 
-    - When and how to failover
-    - The need to script the creation of a sibiling
-    - The need to have sync or async replication
-    - Backups, PITR
-    - Monitoring and alerting
-    - Graphing
+    - When and how to failover (document it)
+    DONE The need to script the creation of a sibiling
+    - The need to have sync or async replication (leave note)
+    - Backups, PITR 
+    OK Monitoring and alerting (will be taken care of)
+    OK Graphing (will be taken care of)
 
--  Test Reboot 
--  Create banchmark baselines?
-
+OK Test Reboot 
+OK Create banchmark baselines (pgbench and dd)
