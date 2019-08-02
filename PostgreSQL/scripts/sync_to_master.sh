@@ -8,6 +8,8 @@
 
 # Note that this script will wipe out all the data on your local db!
 
+cd "$(dirname "$0")"
+
 # Pass a master database as argument
 master=$1
 # This is where the git repo is checked out
@@ -39,23 +41,22 @@ if [[ ! -d $git_path ]]
 then
     git clone git@github.com:mysmartlife-helsinki/cloud-infra.git || { echo "Error cloning repo" ; exit 1 ; }
 else
-    cd $git_path
-    git  pull -q
+    git  -C $git_path pull -q
 fi
 echo "OK!"
 
 echo -n "Checking if $master is a master.... "
 is_in_recovery=`psql -U appuser postgres -h $master -qtc "select pg_is_in_recovery()"`
-if [ "$is_in_recovery" == "t" ]
+if [ "$is_in_recovery" != " f" ]
 then
-    echo "$master is not a master, bailing out!"
+    echo "NOK! $master is not a master, bailing out!"
     exit 1 
 fi
 echo "OK!"
 
 echo -n "Stopping local Postgres.............. "
 # Make sure local Postgres is stopped
-if systemctl status postgresql > /dev/null
+if ! systemctl status postgresql > /dev/null
 then
 	echo "OK!"
 else
@@ -96,8 +97,8 @@ echo "OK!"
 chown postgres.postgres $PGDATA -R
 
 echo -n "Arranging configuration files........ "
-cp $git_path/PostgreSQL/conf/recovery.conf /etc/postgresql/10/main/
-sed -i "s,YOUR_MASTER_IP_HERE,$master,g" /etc/postgresql/10/main/recovery.conf
+cp $git_path/PostgreSQL/conf/recovery.conf /pgdata/10/main/recovery.conf
+sed -i "s,YOUR_MASTER_IP_HERE,$master,g" /pgdata/10/main/recovery.conf
 cp $git_path/PostgreSQL/conf/postgresql.conf /etc/postgresql/10/main/
 chown postgres.postgres /etc/postgresql/10/main/*.conf
 echo "OK!"
