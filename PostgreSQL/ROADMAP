@@ -25,13 +25,13 @@ OK  Evaluate additional extensions
 -  Create Siblings
 OK  Configure master and siblings, instruct replication, pg_hba.conf with separate users
 OK  Update shared network schema on google docs
--  Document failover procedure
--  Document extension creation: per db, how, which postgis_* is needed 
+OK  Document failover procedure
+OK  Document extension creation: per db, how, which postgis_* is needed 
 -  Points to discuss or note down:
     - The need of pgbouncer 
-    - When and how to failover (document it)
+    OK When and how to failover (document it)
     DONE The need to script the creation of a sibiling
-    - The need to have sync or async replication (leave note)
+    OK The need to have sync or async replication (leave note)
     - Backups, PITR 
     OK Monitoring and alerting (will be taken care of)
     OK Graphing (will be taken care of)
